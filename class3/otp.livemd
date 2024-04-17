@@ -20,11 +20,13 @@ defmodule Stack do
   end
 
   @impl true
+  # kom asych
   def handle_call(:pop, _from, [head | tail]) do
     {:reply, head, tail}
   end
 
   @impl true
+  # komunikacja synchroniczna
   def handle_cast({:push, element}, state) do
     {:noreply, [element | state]}
   end
@@ -36,9 +38,11 @@ end
 {:ok, pid} = GenServer.start_link(Stack, [:hello]) |> IO.inspect(label: :START_LINK)
 
 # This is the client
+# sync
 GenServer.call(pid, :pop) |> IO.inspect(label: :POP)
 # => :hello
 
+# async
 GenServer.cast(pid, {:push, :world}) |> IO.inspect(label: :PUSH)
 # => :ok
 
@@ -47,7 +51,7 @@ GenServer.call(pid, :pop) |> IO.inspect(label: :POP)
 ```
 
 ```elixir
-# GenServer.call(pid, :pop)
+GenServer.call(pid, :pop)
 # Error
 ```
 
