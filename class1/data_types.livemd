@@ -218,35 +218,40 @@ Maps are created using `%{}` syntax, classic key-value store.
 
 ```elixir
 %{}
-# Map.new()
+Map.new()
 
-# computer = %{
-#   :type => :pc,
-#   "graphics card" => ["GTX", 760],
-#   {:processor, "intel"} => [{8, :cores}, {:type, :x86}]
-# }
+computer = %{
+  :type => :pc,
+  "graphics card" => ["GTX", 760],
+  {:processor, "intel"} => [{8, :cores}, {:type, :x86}]
+}
 
-# computer[:type]
-# computer[{:processor, "intel"}]
-# computer["graphics card"]
-# computer[:not_exixsting_key]
-# Map.get(computer, :not_existing_key)
-# Map.get(computer, :not_existing_key, "default_value")
+computer[:type]
+computer[{:processor, "intel"}]
+computer["graphics card"]
+computer[:not_exixsting_key]
+Map.get(computer, :not_existing_key)
+Map.get(computer, :not_existing_key, "default_value")
 
-# computer.type
-# # computer.not_exixsting_key
-# # computer."graphics card"
+computer.type
+# computer.not_exixsting_key
+# computer."graphics card"
 
-# laptop = %{computer | :type => :laptop}
-# # laptop = %{computer | :sound => {:serround, 5.1}}
-# laptop = Map.put(computer, :sound, {:serround, 5.1})
+laptop = %{computer | :type => :laptop}
+laptop = Map.put(computer, :sound, {:serround, 5.1})
 
-# tablet = %{:type => %{device_type: :tablet, os: :android}}
+tablet = %{:type => %{device_type: :tablet, os: :android}}
 
 # tablet.type.os
 # tablet[:type].os
 # tablet.type[:os]
 # tablet[:type][:os]
+```
+
+```elixir
+map = %{:a => nil}
+Map.get(map, :a, "nic tu nie ma")
+Map.has_key?(map, :a)
 ```
 
 ## Structs
@@ -268,9 +273,9 @@ pc = %Device{
 
 # pc.os
 
-# tablet = %Device{
-#   device_type: :tablet,
-#   processor: {:intel, :x86},
-#   os: :android
-# }
+tablet = %Device{
+  device_type: :tablet,
+  processor: {:intel, :x86},
+  os: :android
+}
 ```

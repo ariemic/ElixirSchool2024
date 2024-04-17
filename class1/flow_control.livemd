@@ -45,25 +45,25 @@ if true do
   IO.puts("This works!")
 end
 
-# unless true do
-#  IO.puts("This will never be seen")
-# end
+unless true do
+  IO.puts("This will never be seen")
+end
 
-# unless false do
-#   IO.puts("This will be seen")
-# end
+unless false do
+  IO.puts("This will be seen")
+end
 
-# if nil do
-#  IO.puts("This won't be seen")
-# else
-#  IO.puts("This will")
-# end
+if nil do
+  IO.puts("This won't be seen")
+else
+  IO.puts("This will")
+end
 ```
 
 ## Case
 
 ```elixir
-earnings = 10
+earnings = 11
 
 special_value = 12
 
@@ -123,6 +123,8 @@ add2 = &(&1 + &2)
 add2.(2, 3)
 ```
 
+Nie indeksujemy od 0 tylko od 1
+
 ```elixir
 # Pattern meatching in annonimous functions:
 count = fn
@@ -155,22 +157,26 @@ add.(add.(1, 2), 3)
 Functions that accept orther functions as arguments. Read more [here](https://serokell.io/blog/elixir-for-beginners#%E2%9E%A1%EF%B8%8F-higher-order-functions)
 
 ```elixir
-devices = [
-  %{:os => :mac, :processor => :intel, :type => :laptop},
-  %{:os => :mac, :processor => :intel, :type => :phone},
-  %{:os => :windows, :processor => :intel, :type => :laptop},
-  %{:os => :android, :processor => :intel, :type => :phone},
-  %{:os => :windows, :processor => :intel, :type => :phone}
-]
+devices =
+  [
+    %{:os => :mac, :processor => :intel, :type => :laptop},
+    %{:os => :mac, :processor => :intel, :type => :phone},
+    %{:os => :windows, :processor => :intel, :type => :laptop},
+    %{:os => :android, :processor => :intel, :type => :phone},
+    %{:os => :windows, :processor => :intel, :type => :phone}
+  ]
 
-## I want to know what type of divices are used  
-# devices
-# |> Enum.map(fn %{:type => type} -> type end)
-# |> Enum.uniq()
+  ## I want to know what type of divices are used  
+  # devices
+  # |> Enum.map(fn %{:type => type} -> type end)
+  # |> Enum.uniq()
 
-## I want to see the windows running divices
-# devices
-# |> Enum.filter(fn(%{:os => :windows}) -> true; _ -> false end)
+  ## I want to see the windows running divices
+  # devices
+  |> Enum.filter(fn
+    %{:os => :windows} -> true
+    _ -> false
+  end)
 ```
 
 ## See also
@@ -200,7 +206,7 @@ defmodule Math.Examples.Fib do
 
   def seq_fib(max), do: piv_fib(max, 0, 1, 0)
 
-  defp piv_fib(max, counter, current, previous) when counter >= max, do: current
+  defp piv_fib(max, counter, current, _previous) when counter > max, do: current
 
   ## Handling the warining:
   ## warning: variable "previous" is unused (if the variable is not meant to be used, prefix it with an underscore)

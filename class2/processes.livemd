@@ -95,15 +95,17 @@ end
 ```
 
 ```elixir
-# self() |> :erlang.process_info(:message_queue_len) |> IO.inspect()
-# send(self(), {:question, "How are you?"})
-# self() |> :erlang.process_info(:message_queue_len) |> IO.inspect()
-# receive do
-#   {:greetings, content} -> IO.inspect(content, label: "I have received")
-# end
-# ## This will neve happen
-# self() |> :erlang.process_info(:message_queue_len) |> IO.inspect()
-# ## comment out after showing
+self() |> :erlang.process_info(:message_queue_len) |> IO.inspect()
+send(self(), {:question, "How are you?"})
+self() |> :erlang.process_info(:message_queue_len) |> IO.inspect()
+
+receive do
+  {:greetings, content} -> IO.inspect(content, label: "I have received")
+end
+
+## This will neve happen
+self() |> :erlang.process_info(:message_queue_len) |> IO.inspect()
+## comment out after showing
 ```
 
 After the previous block was executed there are some trash messages left in our main process. We can flush them by running following function:

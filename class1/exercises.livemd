@@ -6,8 +6,12 @@ Write functions `sum(n)` that uses recursion to calculate the sum of integers fr
 
 ```elixir
 defmodule Recursive do
-  def sum(_n) do
-    # Your code here
+  def sum(0) do
+    0
+  end
+
+  def sum(i) do
+    sum(i - 1) + i
   end
 end
 ```
@@ -30,8 +34,29 @@ Tip: see [How to use div/2 and/or rem/2?](https://elixir-lang.org/getting-starte
 
 ```elixir
 defmodule FizzBuzz do
-  def fizzbuzz(_n) do
-    # Your code here
+  # Enum.reverse() - reverse the list
+  def fizzbuzz(n) do
+    Enum.reverse(fizzbuzz_rec(n))
+  end
+
+  defp fizzbuzz_rec(0) do
+    []
+  end
+
+  defp fizzbuzz_rec(n) do
+    [map_number(n) | fizzbuzz_rec(n - 1)]
+  end
+
+  defp map_number(n) do
+    by_3 = rem(n, 3) == 0
+    by_5 = rem(n, 5) == 0
+
+    cond do
+      by_3 and by_5 -> :fizzbuzz
+      by_3 -> :fizz
+      by_5 -> :buzz
+      true -> n
+    end
   end
 end
 ```
