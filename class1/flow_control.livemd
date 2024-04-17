@@ -24,10 +24,9 @@ value
 
 ```elixir
 list = [1, 2, 3]
-# [head | tail] = list
-# head
-# tail
-# [^head, 2, b] = list
+[head | tail] = list
+# jjjj
+[^head, 2, b] = list
 # b
 # [a, b] = list
 # [] = list
@@ -81,7 +80,9 @@ end
 `case` is useful when you need to match against different values. However, in many circumstances, we want to check different conditions and find the first one that does not evaluate to `nil` or `false`. If all of the conditions return nil or false, an error (`CondClauseError`) is raised. For this reason, it may be necessary to add a final condition, equal to `true`, which will always match
 
 ```elixir
-cond do
+salary when salary > 12 -> "you earn #{salary} you are too rich"
+  _ -> "you are underpaid"salary when salary > 12 -> "you earn #{salary} you are too rich"
+  _ -> "you are underpaid"cond do
   2 + 2 == 5 ->
     "This will not be true"
 
